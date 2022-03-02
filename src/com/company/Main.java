@@ -1,4 +1,5 @@
 package com.company;
+import java.util.Arrays;
 import java.util.Scanner;
 public class Main {
     Scanner input = new Scanner(System.in);
@@ -12,6 +13,7 @@ public class Main {
     String stringInput;
     public static void main(String[] args) {
         Main main = new Main();
+       // main.password();
         main.encryptOrDecrypt();
         main.encrypt();
         main.decrypt();
@@ -20,8 +22,18 @@ public class Main {
         main.decrypt();
         main.terminate();
     }
+    public void password(){
+        Scanner input2 = new Scanner(System.in);
+        int number= input2.nextInt();
+        int[] array = new int[number];
+        for(int i=0; i<number; i++)
+        {
+            array[i]=input2.nextInt();
+            System.out.println(Arrays.toString(array));
+        }
+    }
     public void encryptOrDecrypt(){
-        System.out.println("Would you like to \"encrypt\" or \"decrypt\" a message?\n");
+        System.out.println("\nWould you like to \"encrypt\" or \"decrypt\" a message?");
         encryptOrDecrypt = input.nextLine();
     }
     public void encrypt() {
@@ -31,42 +43,44 @@ public class Main {
             stringInput = stringInput.toUpperCase();
             int[] arrayOfInput = new int[stringInput.length()];
 
-            System.out.println("What key will you be using? 1 or 2?\n");
+            System.out.println("What key will you be using? 1 or 2?");
             int shiftKey = input.nextInt();
             input.nextLine(); //Scannerbug
             if (shiftKey == 1) {
                 for (int i = 0; i < stringInput.length(); i++) {
                     arrayOfInput[i] = stringInput.charAt(i);
-                    int number = shift1Encrypt.indexOf(arrayOfInput[i]);
-                    System.out.println(number);
+                    arrayOfInput[i] = shift1Encrypt.indexOf(arrayOfInput[i]);
+                    if(i == stringInput.length()-1){
+                        System.out.println(Arrays.toString(arrayOfInput));
+                    }
                 }
             }
             if (shiftKey == 2) {
                 for (int i = 0; i < stringInput.length(); i++) {
                     arrayOfInput[i] = stringInput.charAt(i);
-                    int number = shift2Encrypt.indexOf(arrayOfInput[i]);
-                    System.out.println(number);
+                    arrayOfInput[i] = shift2Encrypt.indexOf(arrayOfInput[i]);
+                    if(i == stringInput.length()-1){
+                        System.out.println(Arrays.toString(arrayOfInput));
+                    }
                 }
             }
         }
     }
     public void  decrypt(){
         if (encryptOrDecrypt.equals("decrypt")) {
-            System.out.println("You have chosen to decrypt a message. What key will you be using?\n");
+            System.out.println("You have chosen to decrypt a message. What key will you be using?");
             int shiftKey = input.nextInt();
             System.out.println("Type in the encrypted message:");
             if (shiftKey == 1) {
                 for (int i = 0; i < stringInput.length(); i++) {
                     int intInput = input.nextInt();
-                    char letter = shift1Decrypt[intInput];
-                    System.out.println(letter);
+                    System.out.println(shift1Decrypt[intInput]);
                 }
             }
             if (shiftKey == 2) {
                 for (int i = 0; i < stringInput.length(); i++) {
                     int intInput = input.nextInt();
-                    char letter = shift2Decrypt[intInput];
-                    System.out.println(letter);
+                    System.out.println(shift2Decrypt[intInput]);
                 }
             }
         }
